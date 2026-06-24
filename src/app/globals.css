@@ -1,0 +1,814 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─────────────────────────────────────────────
+   GLE Design System v3.0
+   Primary: Electric Lime #AAFF00
+   Base: Near-black #0C0C0C
+   Interactive, bold, clean
+   ───────────────────────────────────────────── */
+@theme inline {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* shadcn semantic → CSS vars */
+  --color-background:                  var(--background);
+  --color-foreground:                  var(--foreground);
+  --color-card:                        var(--card);
+  --color-card-foreground:             var(--card-foreground);
+  --color-popover:                     var(--popover);
+  --color-popover-foreground:          var(--popover-foreground);
+  --color-primary:                     var(--primary);
+  --color-primary-foreground:          var(--primary-foreground);
+  --color-secondary:                   var(--secondary);
+  --color-secondary-foreground:        var(--secondary-foreground);
+  --color-muted:                       var(--muted);
+  --color-muted-foreground:            var(--muted-foreground);
+  --color-accent:                      var(--accent);
+  --color-accent-foreground:           var(--accent-foreground);
+  --color-destructive:                 var(--destructive);
+  --color-border:                      var(--border);
+  --color-input:                       var(--input);
+  --color-ring:                        var(--ring);
+
+  /* GLE brand tokens */
+  --color-gle-primary:                 var(--gle-primary);
+  --color-gle-primary-hover:           var(--gle-primary-hover);
+  --color-gle-primary-muted:           var(--gle-primary-muted);
+  --color-gle-base:                    var(--gle-base);
+  --color-gle-bg:                      var(--gle-bg);
+  --color-gle-bg-subtle:               var(--gle-bg-subtle);
+  --color-gle-bg-elevated:             var(--gle-bg-elevated);
+  --color-gle-border:                  var(--gle-border);
+  --color-gle-border-strong:           var(--gle-border-strong);
+  --color-gle-text-primary:            var(--gle-text-primary);
+  --color-gle-text-secondary:          var(--gle-text-secondary);
+  --color-gle-text-muted:              var(--gle-text-muted);
+  --color-gle-text-on-primary:         var(--gle-text-on-primary);
+  --color-gle-error:                   var(--gle-error);
+  --color-gle-success:                 var(--gle-success);
+  --color-gle-warning:                 var(--gle-warning);
+  --color-gle-map-bg:                  #060C14;
+
+  /* Sidebar */
+  --color-sidebar:                     var(--sidebar);
+  --color-sidebar-foreground:          var(--sidebar-foreground);
+  --color-sidebar-primary:             var(--sidebar-primary);
+  --color-sidebar-primary-foreground:  var(--sidebar-primary-foreground);
+  --color-sidebar-accent:              var(--sidebar-accent);
+  --color-sidebar-accent-foreground:   var(--sidebar-accent-foreground);
+  --color-sidebar-border:              var(--sidebar-border);
+  --color-sidebar-ring:                var(--sidebar-ring);
+
+  /* Radius scale */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius:    0.625rem;
+
+  /* Spacing — 4px base */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-7:  32px;
+  --space-8:  48px;
+  --space-9:  64px;
+  --space-10: 96px;
+  --space-11: 128px;
+
+  /* Motion */
+  --duration-instant: 80ms;
+  --duration-fast:    150ms;
+  --duration-base:    220ms;
+  --duration-slow:    350ms;
+  --easing-standard:  cubic-bezier(0.2, 0, 0, 1);
+  --easing-enter:     cubic-bezier(0, 0, 0.2, 1);
+  --easing-exit:      cubic-bezier(0.4, 0, 1, 1);
+  --easing-bounce:    cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─────────────────────────────────────────────
+   LIGHT MODE
+   New Palette: Lighthouse, Teal Spill, Distant Cloud, June Ivy, Cocoon, Yellow Ace
+   ───────────────────────────────────────────── */
+:root {
+  /* ── GLE brand ── */
+  --gle-primary:          #58CC02;   /* Vibrant Green */
+  --gle-primary-hover:    #46A302;   /* Deeper Green */
+  --gle-primary-muted:    #E5F5D9;   /* Tinted surface for highlights */
+  --gle-base:             #032425;   /* Teal Spill */
+  --gle-bg:               #F3F4F4;   /* Lighthouse */
+  --gle-bg-subtle:        #E5EAE6;   /* Distant Cloud */
+  --gle-bg-elevated:      #DEDBCC;   /* Cocoon */
+  --gle-border:           #E5EAE6;   /* Distant Cloud */
+  --gle-border-strong:    #416858;   /* June Ivy */
+  --gle-text-primary:     #032425;   /* Teal Spill */
+  --gle-text-secondary:   #416858;   /* June Ivy */
+  --gle-text-muted:       #7A8A83;   /* Muted June Ivy */
+  --gle-text-on-primary:  #FFFFFF;   /* White text on green */
+  --gle-error:            #E53935;
+  --gle-success:          #22863A;
+  --gle-warning:          #F59E0B;
+
+  /* ── shadcn tokens (light) ── */
+  --background:           #F3F4F4;
+  --foreground:           #032425;
+  --card:                 #DEDBCC;
+  --card-foreground:      #032425;
+  --popover:              #F3F4F4;
+  --popover-foreground:   #032425;
+  --primary:              #58CC02;
+  --primary-foreground:   #FFFFFF;
+  --secondary:            #E5EAE6;
+  --secondary-foreground: #032425;
+  --muted:                #E5EAE6;
+  --muted-foreground:     #416858;
+  --accent:               #58CC02;
+  --accent-foreground:    #FFFFFF;
+  --destructive:          #E53935;
+  --border:               #E5EAE6;
+  --input:                #E5EAE6;
+  --ring:                 #58CC02;
+
+  /* ── Sidebar (light) ── */
+  --sidebar:                      #F3F4F4;
+  --sidebar-foreground:           #032425;
+  --sidebar-primary:              #58CC02;
+  --sidebar-primary-foreground:   #FFFFFF;
+  --sidebar-accent:               #E5EAE6;
+  --sidebar-accent-foreground:    #032425;
+  --sidebar-border:               #E5EAE6;
+  --sidebar-ring:                 #58CC02;
+}
+
+/* ─────────────────────────────────────────────
+   DARK MODE
+   Inverted Palette
+   ───────────────────────────────────────────── */
+.dark {
+  /* ── GLE brand (dark) ── */
+  --gle-primary:          #58CC02;   /* Vibrant Green */
+  --gle-primary-hover:    #6BE007;   /* Brighter Green */
+  --gle-primary-muted:    #1A330A;   /* Dark tinted surface */
+  --gle-base:             #F3F4F4;   /* Lighthouse */
+  --gle-bg:               #032425;   /* Teal Spill */
+  --gle-bg-subtle:        #021818;   /* Darker Teal Spill */
+  --gle-bg-elevated:      #416858;   /* June Ivy */
+  --gle-border:           #416858;   /* June Ivy */
+  --gle-border-strong:    #DEDBCC;   /* Cocoon */
+  --gle-text-primary:     #F3F4F4;   /* Lighthouse */
+  --gle-text-secondary:   #DEDBCC;   /* Cocoon */
+  --gle-text-muted:       #8A9A93;   /* Muted grey/green */
+  --gle-text-on-primary:  #FFFFFF;   /* White text on green */
+  --gle-error:            #F44336;
+  --gle-success:          #4CAF50;
+  --gle-warning:          #FFC107;
+
+  /* ── shadcn tokens (dark) ── */
+  --background:           #032425;
+  --foreground:           #F3F4F4;
+  --card:                 #416858;
+  --card-foreground:      #F3F4F4;
+  --popover:              #032425;
+  --popover-foreground:   #F3F4F4;
+  --primary:              #58CC02;
+  --primary-foreground:   #FFFFFF;
+  --secondary:            #416858;
+  --secondary-foreground: #F3F4F4;
+  --muted:                #416858;
+  --muted-foreground:     #DEDBCC;
+  --accent:               #58CC02;
+  --accent-foreground:    #FFFFFF;
+  --destructive:          #F44336;
+  --border:               #416858;
+  --input:                #416858;
+  --ring:                 #58CC02;
+
+  /* ── Sidebar (dark) ── */
+  --sidebar:                      #032425;
+  --sidebar-foreground:           #F3F4F4;
+  --sidebar-primary:              #58CC02;
+  --sidebar-primary-foreground:   #FFFFFF;
+  --sidebar-accent:               #416858;
+  --sidebar-accent-foreground:    #58CC02;
+  --sidebar-border:               #416858;
+  --sidebar-ring:                 #58CC02;
+}
+
+/* ─────────────────────────────────────────────
+   BASE LAYER
+   ───────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    transition-property: opacity, transform, border-color, background-color, color;
+    transition-duration: var(--duration-fast);
+    transition-timing-function: var(--easing-standard);
+    box-sizing: border-box;
+  }
+
+  *[class*="animate-"],
+  *[class*="scroll-animate-"] {
+    transition-property: none;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    font-variant-numeric: tabular-nums;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-size: 15px;
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Focus ring — lime, always visible, never removed */
+  :focus-visible {
+    outline: 2px solid var(--gle-primary);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Selection highlight — lime */
+  ::selection {
+    background-color: var(--gle-primary);
+    color: var(--gle-text-on-primary);
+  }
+
+  /* Scrollbar — minimal, matches theme */
+  ::-webkit-scrollbar       { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--gle-border-strong);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gle-text-muted); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ─────────────────────────────────────────────
+   TYPE SCALE
+   ───────────────────────────────────────────── */
+.gle-display {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.gle-heading-1 {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.gle-heading-2 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+.gle-heading-3 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.gle-body-lg {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.gle-body {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.gle-label {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+.gle-caption {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.015em;
+}
+
+/* ─────────────────────────────────────────────
+   COMPONENT TOKENS
+   ───────────────────────────────────────────── */
+
+/* ── Cards ── */
+.gle-card {
+  background-color: var(--gle-bg-elevated);
+  border: 1px solid var(--gle-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+/* Interactive card — e.g. deck card, city card */
+.gle-card-interactive {
+  background-color: var(--gle-bg-elevated);
+  border: 1px solid var(--gle-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--easing-standard),
+    transform var(--duration-fast) var(--easing-standard),
+    background-color var(--duration-fast) var(--easing-standard);
+}
+.gle-card-interactive:hover {
+  border-color: var(--gle-primary);
+  background-color: var(--gle-primary-muted);
+  transform: translateY(-2px);
+}
+.gle-card-interactive:active {
+  transform: translateY(0px);
+}
+
+/* Summary card — left lime stripe */
+.gle-card-summary {
+  border-left: 3px solid var(--gle-primary);
+}
+
+/* Highlighted card — lime fill (active session, matched state) */
+.gle-card-highlight {
+  background-color: var(--gle-primary);
+  border: 1px solid var(--gle-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  color: var(--gle-text-on-primary);
+}
+
+/* ── Buttons ── */
+.gle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 42px;
+  padding: 0 20px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  border: none;
+  transition:
+    opacity var(--duration-fast) var(--easing-standard),
+    transform var(--duration-fast) var(--easing-standard),
+    background-color var(--duration-fast) var(--easing-standard);
+  white-space: nowrap;
+  user-select: none;
+}
+.gle-btn:active   { transform: scale(0.97); }
+.gle-btn:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+/* Primary — lime fill, THE main CTA */
+.gle-btn-primary {
+  background-color: var(--gle-primary);
+  color: var(--gle-text-on-primary);
+}
+.gle-btn-primary:hover { background-color: var(--gle-primary-hover); }
+
+/* Base — black fill, secondary importance */
+.gle-btn-base {
+  background-color: var(--gle-base);
+  color: #FFFFFF;
+}
+.dark .gle-btn-base {
+  background-color: var(--gle-text-primary);
+  color: var(--gle-bg);
+}
+.gle-btn-base:hover { opacity: 0.85; }
+
+/* Outline — bordered, no fill */
+.gle-btn-outline {
+  background-color: transparent;
+  color: var(--gle-text-primary);
+  border: 1.5px solid var(--gle-border-strong);
+}
+.gle-btn-outline:hover {
+  border-color: var(--gle-primary);
+  color: var(--gle-primary);
+}
+
+/* Ghost — no border, no bg */
+.gle-btn-ghost {
+  background-color: transparent;
+  color: var(--gle-text-secondary);
+}
+.gle-btn-ghost:hover {
+  background-color: var(--gle-bg-subtle);
+  color: var(--gle-text-primary);
+}
+
+/* Danger */
+.gle-btn-danger {
+  background-color: transparent;
+  color: var(--gle-error);
+  border: 1.5px solid var(--gle-error);
+}
+.gle-btn-danger:hover { background-color: var(--gle-error); color: #FFFFFF; }
+
+/* Size variants */
+.gle-btn-sm { height: 32px; padding: 0 14px; font-size: 12px; }
+.gle-btn-lg { height: 52px; padding: 0 28px; font-size: 15px; font-weight: 700; }
+.gle-btn-xl { height: 60px; padding: 0 36px; font-size: 16px; font-weight: 700; border-radius: var(--radius-lg); }
+
+/* ── Inputs ── */
+.gle-input {
+  height: 44px;
+  padding: 0 14px;
+  border: 1.5px solid var(--gle-border);
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 400;
+  background-color: var(--gle-bg);
+  color: var(--gle-text-primary);
+  width: 100%;
+  transition:
+    border-color var(--duration-fast) var(--easing-standard),
+    box-shadow var(--duration-fast) var(--easing-standard);
+}
+.gle-input::placeholder     { color: var(--gle-text-muted); }
+.gle-input:hover            { border-color: var(--gle-border-strong); }
+.gle-input:focus            {
+  border-color: var(--gle-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gle-primary) 20%, transparent);
+  outline: none;
+}
+.gle-input[aria-invalid="true"] {
+  border-color: var(--gle-error);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gle-error) 15%, transparent);
+}
+
+.gle-textarea {
+  padding: 12px 14px;
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* ── Badges ── */
+.gle-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  height: 22px;
+  padding: 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-xs);
+  background-color: var(--gle-bg-subtle);
+  color: var(--gle-text-secondary);
+  border: 1px solid var(--gle-border);
+}
+
+/* Lime badge — active/matched state */
+.gle-badge-primary {
+  background-color: var(--gle-primary);
+  color: var(--gle-text-on-primary);
+  border-color: var(--gle-primary);
+}
+
+.gle-badge-online {
+  background-color: color-mix(in srgb, var(--gle-success) 12%, transparent);
+  color: var(--gle-success);
+  border-color: color-mix(in srgb, var(--gle-success) 30%, transparent);
+}
+
+.gle-badge-muted {
+  background-color: color-mix(in srgb, var(--gle-primary) 12%, transparent);
+  color: var(--gle-text-primary);
+  border-color: color-mix(in srgb, var(--gle-primary) 25%, transparent);
+}
+
+/* ── Progress bar ── */
+.gle-progress {
+  height: 4px;
+  background-color: var(--gle-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.gle-progress-fill {
+  height: 100%;
+  background-color: var(--gle-primary);
+  border-radius: 999px;
+  transition: width var(--duration-base) var(--easing-standard);
+}
+
+/* ── Divider ── */
+.gle-divider {
+  height: 1px;
+  background-color: var(--gle-border);
+  margin: var(--space-6) 0;
+}
+
+/* ── Toasts ── */
+.gle-toast {
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  max-width: 360px;
+  background-color: var(--gle-bg-elevated);
+  border: 1px solid var(--gle-border);
+  color: var(--gle-text-primary);
+}
+.gle-toast-success { border-left: 3px solid var(--gle-success); }
+.gle-toast-error   { border-left: 3px solid var(--gle-error); }
+.gle-toast-primary { border-left: 3px solid var(--gle-primary); }
+
+/* ── Stat chip — for summary cards ── */
+.gle-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-5);
+  background-color: var(--gle-bg-elevated);
+  border: 1px solid var(--gle-border);
+  border-radius: var(--radius-md);
+}
+.gle-stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--gle-text-primary);
+  line-height: 1;
+}
+.gle-stat-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gle-text-muted);
+  letter-spacing: 0.02em;
+}
+/* Highlighted stat — lime number */
+.gle-stat-highlight .gle-stat-value {
+  color: var(--gle-primary);
+}
+
+/* ── Navigation tab (in-page) ── */
+.gle-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 36px;
+  padding: 0 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gle-text-secondary);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--easing-standard),
+    color var(--duration-fast) var(--easing-standard);
+  border: none;
+  background: transparent;
+}
+.gle-tab:hover {
+  background-color: var(--gle-bg-subtle);
+  color: var(--gle-text-primary);
+}
+.gle-tab[data-active="true"] {
+  background-color: var(--gle-primary);
+  color: var(--gle-text-on-primary);
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────
+   WORLD MAP CANVAS
+   Always dark regardless of color mode
+   ───────────────────────────────────────────── */
+.gle-map-canvas {
+  background-color: #060C14;
+  width: 100%;
+  height: 100%;
+}
+
+/* City dot — online */
+.gle-map-dot-active {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--gle-primary);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--gle-primary) 60%, transparent);
+  animation: map-pulse 2s ease-in-out infinite;
+}
+
+/* City dot — offline/dim */
+.gle-map-dot-dim {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #2A3A2A;
+  opacity: 0.6;
+}
+
+@keyframes map-pulse {
+  0%   { box-shadow: 0 0 0 0   color-mix(in srgb, var(--gle-primary) 50%, transparent); }
+  70%  { box-shadow: 0 0 0 8px color-mix(in srgb, var(--gle-primary) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0   color-mix(in srgb, var(--gle-primary) 0%, transparent); }
+}
+
+/* ─────────────────────────────────────────────
+   SOLAR SESSION STAGES
+   Product-layer — not UI decoration
+   ───────────────────────────────────────────── */
+.solar-dawn {
+  background: radial-gradient(ellipse at center,
+    #1C2A4A 0%, #0F1A32 45%, #080D1C 100%);
+  transition: background var(--duration-slow) var(--easing-standard);
+}
+
+.solar-noon {
+  background: radial-gradient(ellipse at center,
+    #DDFF66 0%, #AAFF00 35%, #3D7A00 100%);
+  transition: background var(--duration-slow) var(--easing-standard);
+}
+
+.solar-dusk {
+  background: radial-gradient(ellipse at center,
+    #CC6622 0%, #A04010 45%, #5A1A05 100%);
+  transition: background var(--duration-slow) var(--easing-standard);
+}
+
+.solar-sunset {
+  background: radial-gradient(ellipse at center,
+    #2E1050 0%, #180830 55%, #060210 100%);
+  transition: background var(--duration-slow) var(--easing-standard);
+}
+
+.solar-night {
+  background: #000000;
+  transition: background var(--duration-slow) var(--easing-standard);
+}
+
+/* ─────────────────────────────────────────────
+   INTERACTIVE STATES — learning UX
+   ───────────────────────────────────────────── */
+
+/* Correct answer flash */
+.gle-state-correct {
+  animation: flash-correct 0.5s var(--easing-standard) forwards;
+}
+@keyframes flash-correct {
+  0%   { background-color: inherit; }
+  30%  { background-color: color-mix(in srgb, var(--gle-primary) 25%, transparent); border-color: var(--gle-primary); }
+  100% { background-color: inherit; }
+}
+
+/* Wrong answer shake */
+.gle-state-wrong {
+  animation: shake-wrong 0.4s var(--easing-standard) forwards;
+  border-color: var(--gle-error) !important;
+}
+@keyframes shake-wrong {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-6px); }
+  40%      { transform: translateX(6px); }
+  60%      { transform: translateX(-4px); }
+  80%      { transform: translateX(4px); }
+}
+
+/* Streak indicator — lime glow */
+.gle-streak-active {
+  box-shadow: 0 0 0 2px var(--gle-primary), 0 0 16px color-mix(in srgb, var(--gle-primary) 30%, transparent);
+}
+
+/* ─────────────────────────────────────────────
+   ANIMATION KEYFRAMES
+   ───────────────────────────────────────────── */
+@keyframes ping-slow {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-smooth {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(calc(-100% / 4)); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.96) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomOut {
+  from { opacity: 0; transform: scale(1.06); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes liftUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes night-switch {
+  0%   { opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ─────────────────────────────────────────────
+   ANIMATION UTILITY CLASSES
+   ───────────────────────────────────────────── */
+.animate-ping-slow       { animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+.animate-marquee         { animation: marquee 40s linear infinite; }
+.animate-marquee-smooth  { animation: marquee-smooth 30s linear infinite; will-change: transform; }
+.animate-zoom-out        { animation: zoomOut 0.5s var(--easing-enter) forwards; }
+.animate-lift-up         { animation: liftUp 0.4s var(--easing-enter) forwards; opacity: 0; }
+.animate-fade-in         { animation: fadeIn 0.3s var(--easing-enter) forwards; }
+.animate-night-switch    { animation: night-switch 2s ease-in-out forwards; }
+
+[class*="scroll-animate-fade"],
+[class*="scroll-animate-slide"] {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.scroll-animate-hidden  { opacity: 0 !important; transform: translateY(32px) !important; }
+.scroll-animate-visible { opacity: 1; transform: translateY(0); }
+
+.scroll-animate-fade-up    { animation: fadeInUp    1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.scroll-animate-fade-left  { animation: fadeInLeft  1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.scroll-animate-fade-right { animation: fadeInRight 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.scroll-animate-fade-scale { animation: fadeInScale 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.scroll-animate-slide-up   { animation: slideInUp   1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+.scroll-animate-delay-100 { animation-delay: 0.1s; }
+.scroll-animate-delay-200 { animation-delay: 0.2s; }
+.scroll-animate-delay-300 { animation-delay: 0.3s; }
+.scroll-animate-delay-400 { animation-delay: 0.4s; }
+.scroll-animate-delay-500 { animation-delay: 0.5s; }
+.scroll-animate-delay-600 { animation-delay: 0.6s; }
+.scroll-animate-delay-700 { animation-delay: 0.7s; }
+.scroll-animate-delay-800 { animation-delay: 0.8s; }
+
+/* ─────────────────────────────────────────────
+   MARQUEE FADE MASK
+   ───────────────────────────────────────────── */
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+}
