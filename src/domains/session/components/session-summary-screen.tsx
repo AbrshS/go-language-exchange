@@ -33,7 +33,11 @@ const SUMMARY_DATA = {
   transcriptUrl: "https://gle-transcripts.s3.amazonaws.com/ses_1a2b/transcript.txt?AWSAccessKeyId=AKIAIOSFODNN7EXAMPLE&Signature=vjbyPxybdZaNmGa%2ByT272YEAiv4%3D&Expires=1782222599"
 };
 
-export function SessionSummaryScreen() {
+interface SessionSummaryScreenProps {
+  onClose?: () => void;
+}
+
+export function SessionSummaryScreen({ onClose }: SessionSummaryScreenProps) {
   const [vocabTab, setVocabTab] = useState<"verbs" | "nouns">("verbs");
 
   return (
@@ -41,6 +45,15 @@ export function SessionSummaryScreen() {
       
       {/* ── Header Hero Section ── */}
       <div className="w-full bg-[var(--gle-base)] relative overflow-hidden pt-12 pb-16 px-10 rounded-b-3xl shadow-xl">
+        {onClose && (
+          <button 
+            onClick={onClose} 
+            className="absolute top-6 right-6 z-20 p-2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full transition-colors cursor-pointer"
+            aria-label="Close"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        )}
         {/* Abstract background elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--gle-primary)] opacity-10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/4 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 blur-2xl rounded-full translate-y-1/2 -translate-x-1/4 pointer-events-none" />
